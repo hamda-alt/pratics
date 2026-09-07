@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider - Three Visible</title>
+    <style>
+        .slider-container {
+            width: 900px; /* Adjust as needed - 3 images * image width */
+            overflow: hidden;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            width: 300px; /* Each image width */
+            height: 400px; /* Adjust as needed */
+            object-fit: cover;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        .nav-button.prev {
+            left: 10px;
+        }
+
+        .nav-button.next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <div class="slider">
+            <img src="gallery-4-270x270.jpg" alt="Image 1" class="slide">
+            <img src="Break-Room-270x270.jpg" alt="Image 2" class="slide">
+            <img src="Green-Room-270x270.jpg" alt="Image 3" class="slide">
+            <img src="gallery-4-270x270.jpg" alt="Image 4" class="slide">
+            <img src="Studio-White-270x270.jpg" alt="Image 5" class="slide">
+            <img src="Green-Room-270x270.jpg" alt="Image 6" class="slide">
+        </div>
+        <button class="nav-button prev" onclick="prevSlide()">&#10094;</button>
+        <button class="nav-button next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <script>
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        let index = 0;
+        const visibleSlides = 3; // Number of slides visible at once
+
+        function nextSlide() {
+            if (index <= slides.length - visibleSlides -1){ //prevent index from going out of bounds
+                 index++;
+                 updateSlider();
+            }
+
+        }
+
+        function prevSlide() {
+            if (index > 0){ //prevent index from going out of bounds
+                index--;
+                updateSlider();
+            }
+        }
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${index * 300}px)`; // 300px is the width of each slide
+        }
+
+        //Optional: Auto slide
+        //setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    </script>
+
+</body>
+</html>
